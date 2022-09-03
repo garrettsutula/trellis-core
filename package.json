@@ -18,11 +18,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/garrettsutula/trellis-uml/issues"
+    "url": "https://github.com/garrettsutula/trellis-core/issues"
   },
-  "homepage": "https://github.com/garrettsutula/trellis-uml#readme",
+  "homepage": "https://github.com/garrettsutula/trellis-core#readme",
   "devDependencies": {
     "@types/node": "^18.7.13",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
