@@ -18,6 +18,6 @@ export function registerPartials(partials: PartialTemplate[]) {
   });
 }
 
-export function compileTemplate(template: string): HandlebarsTemplateDelegate<Handlebars.Template> {
+export function compileTemplate(template: string): HandlebarsTemplateDelegate<any> {
   return Handlebars.compile(template);
 }
