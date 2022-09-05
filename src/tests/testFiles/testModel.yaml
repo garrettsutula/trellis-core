@@ -1,0 +1,4 @@
+name: Test Model
+description: Model used in module tests.
+testReference:
+  $ref: "./TestReference.yaml"
