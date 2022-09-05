@@ -1,6 +1,8 @@
 # Trellis Core Library
 The Trellis core library supports the `trellis-cli` and `trellis-ui` projects by wrapping the [handlebars](https://handlebarsjs.com) and [JSON Schema $Ref Parser](https://github.com/APIDevTools/json-schema-ref-parser) projects to extend and abstract for use in the modeling framework.
 
+> NOTE: Node.js `^18.0.0` is **required** to run tests.
+
 ## JSON Schema $Ref Parser Functionality
 
 ### Utility Functions
