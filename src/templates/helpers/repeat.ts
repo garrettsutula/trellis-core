@@ -4,6 +4,6 @@ export default {
     const acc = [];
     const renderedContent = content.fn();
     acc.length = n;
-    return acc.fill(content).join('');
+    return acc.fill(renderedContent).join('');
   },
 };
