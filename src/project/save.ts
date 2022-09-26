@@ -1,0 +1,1 @@
+// TODO: accept a provider enum value and configuration, return a client that can take a portion of a instantiated Workspace representing an update to the workspace and persist it back with the provider.
