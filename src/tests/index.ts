@@ -2,7 +2,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { strict as assert } from 'node:assert';
 
-import {preprocessModel, postprocessModel, registerPartials, compileTemplate} from '../';
+import {preprocessModel, postprocessModel, registerPartials, compileTemplate, getWorkspaceProvider} from '../';
 
 const cwd = process.cwd();
 const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './src/tests/testFiles/testReference.yaml')}};
@@ -70,3 +70,9 @@ test('compileTemplate', async () => {
   const output = template(testObject);
   assert.ok(output.includes(testObject.name));
 });
+
+test('loadProject', async(t) => {
+  const workspaceProvider = await getWorkspaceProvider('stub');
+  const workspace = workspaceProvider.readWorkspace({});
+  assert.ok(workspace.models.length);
+})
