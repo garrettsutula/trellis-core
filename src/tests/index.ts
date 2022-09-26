@@ -74,5 +74,5 @@ test('compileTemplate', async () => {
 test('loadProject', async(t) => {
   const workspaceProvider = await getWorkspaceProvider('stub');
   const workspace = workspaceProvider.readWorkspace({});
-  assert.ok(workspace.models.length);
+  assert.ok(workspace.models);
 })

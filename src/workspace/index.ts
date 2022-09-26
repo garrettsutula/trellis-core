@@ -1,6 +1,6 @@
 import { provider as stubProvider } from './providers/stub';
 
-export async function createProjectProvider(type: string) {
+export async function getWorkspaceProvider(type: string) {
   switch(type) {
     case 'stub':
       return stubProvider();
