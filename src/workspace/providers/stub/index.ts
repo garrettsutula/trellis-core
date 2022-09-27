@@ -1,5 +1,4 @@
-import { WorkspaceContext } from "../../types";
-import { compileTemplate } from "../../../templates";
+import { WorkspaceContext } from "../../../types";
 
 export function provider() {
   let currentWorkspace = {
@@ -45,7 +44,7 @@ export function provider() {
         {
           modelType: 'System',
           fileType: 'txt',
-          template: compileTemplate('{{name}}'),
+          template: '{{name}}',
         }
       ]
     },
