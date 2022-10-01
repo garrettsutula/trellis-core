@@ -1,4 +1,4 @@
-import { WorkspaceContext } from "../../../types";
+import { Workspace } from "../../../types";
 
 export function provider() {
   let currentWorkspace = {
@@ -52,7 +52,7 @@ export function provider() {
   }
 
   return {
-    readWorkspace: (opts): WorkspaceContext => {
+    readWorkspace: (opts): Workspace => {
       return currentWorkspace;
     },
     // TODO: figure out params
