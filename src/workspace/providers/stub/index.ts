@@ -8,17 +8,20 @@ export function provider() {
           name: 'Test System',
           components: {
             ui: {
+              id: 'testSystem.ui',
               name: 'Mobile App',
               type: 'UI',
               dependencies: [{ $ref: "#/System/testSystem/components/service" }],
             },
             service: {
+              id: 'testSystem.service',
               name: 'REST API',
               type: 'service',
               dependencies: [ { $ref: "#/System/testSystem/components/db" } ],
             },
             db: {
               name: 'SQL Database',
+              id: 'testSystem.db',
               type: 'Database',
               dependencies: [],
             },
@@ -29,6 +32,7 @@ export function provider() {
           components: {
             newUi: {
               name: 'New Mobile App',
+              id: 'newSystem.newUi',
               type: 'UI',
               dependencies: [
                 { $ref: "#/System/testSystem/components/service" }
