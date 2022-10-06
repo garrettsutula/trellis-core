@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "npm run clean && npm run build && node --test ./dist/tests/index.js",
+    "test": "npm run clean && npm run build && node --test",
     "clean": "rimraf dist/",
     "build": "npm run clean && tsc",
     "watch": "chokidar \"src/**\" --initial --silent -c \"npm run build\"",
