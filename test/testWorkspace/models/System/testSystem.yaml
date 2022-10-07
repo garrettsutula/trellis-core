@@ -1,0 +1,5 @@
+name: Test Model
+components:
+  ui:
+    name: Test UI
+    type: UI
