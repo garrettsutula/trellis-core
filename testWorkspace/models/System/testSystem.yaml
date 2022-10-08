@@ -1,0 +1,10 @@
+name: Test Model
+components:
+  ui:
+    name: Test UI
+    type: UI
+    dependsOn:
+      - "#/components/service"
+  service:
+    name: Test Service
+    type: Service
