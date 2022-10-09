@@ -5,7 +5,7 @@ import { strict as assert } from 'node:assert';
 import { preprocessModel, postprocessModel } from '.';
 
 const cwd = process.cwd();
-const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './test/testReference.yaml')}};
+const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml')}};
 const testPreprocessFn = (newName) => { return (model) => { model.name = newName; return model; }};
 const testPostprocessFn = (newName) => { return (model) => { model.testReference.name = newName; return model; }}
 
@@ -22,13 +22,13 @@ test('model processing scripts', async (t) => {
       }),
       t.test('function that changes the model', async () => {
         const newName = 'changed for test';
-        const model = await preprocessModel(path.join(cwd, './test/testModel.yaml'), testPreprocessFn(newName));
+        const model = await preprocessModel(path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml'), testPreprocessFn(newName));
         assert.ok(model.includes(newName));
       }),
     ];
   const postprocessingTests = [
     await t.test('load from file', async () => {
-      const model = await postprocessModel(path.join(cwd, './test/testModel.yaml'));
+      const model = await postprocessModel(path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml'));
       assert.ok(model);
     }),
     await t.test('load from object', async () => {
@@ -37,7 +37,7 @@ test('model processing scripts', async (t) => {
     }),
     await t.test('function that changes the model', async () => {
       const newName = 'changed for test';
-      const model = await postprocessModel(path.join(cwd, './test/testModel.yaml'), testPostprocessFn(newName));
+      const model = await postprocessModel(path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml'), testPostprocessFn(newName));
       assert.equal(model.testReference.name, newName);
     }),
   ]

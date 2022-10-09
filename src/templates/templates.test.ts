@@ -7,11 +7,11 @@ import { registerPartials, compileTemplate } from '.';
 const cwd = process.cwd();
 const testPartials = [{name: 'TestPartial', template: 'test partial template'}];
 const testTemplate = 'test template {{name}}';
-const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './test/testReference.yaml')}};
+const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml')}};
 
 test('load workspace from filesystem', async (t) => {
 
-  Promise.all([
+  await Promise.all([
     t.test('init and register partial', () => {
       registerPartials(testPartials);
     }),

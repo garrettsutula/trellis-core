@@ -11,22 +11,22 @@ test('load workspace from filesystem', async (t) => {
 
   Promise.all([
     t.test('load scripts from filesystem', async (t) => {
-      const scripts = await getScripts(path.join(process.cwd(),'./test/testWorkspace'));
+      const scripts = await getScripts(path.join(process.cwd(),'./testWorkspace'));
       assert.ok(scripts);
     }),
     t.test('load schemas from filesystem', async (t) => {
-      const schemas = await getSchemas(path.join(process.cwd(),'./test/testWorkspace'));
+      const schemas = await getSchemas(path.join(process.cwd(),'./testWorkspace'));
       assert.ok(schemas);
     }),
     await t.test('load templates from filesystem', async (t) => {
-      const templates = await getTemplates(path.join(process.cwd(),'./test/testWorkspace'));
+      const templates = await getTemplates(path.join(process.cwd(),'./testWorkspace'));
       assert.ok(templates);
     }),
   ]);
 
   await t.test('load models from filesystem', async (t) => {
-    const schemas = await getSchemas(path.join(process.cwd(),'./test/testWorkspace'));
-    const models = await getModels(path.join(process.cwd(),'./test/testWorkspace'), schemas);
+    const schemas = await getSchemas(path.join(process.cwd(),'./testWorkspace'));
+    const models = await getModels(path.join(process.cwd(),'./testWorkspace'), schemas);
     assert.ok(models);
   });
 
