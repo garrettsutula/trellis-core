@@ -17,7 +17,7 @@ export type OutputTemplate = {
 };
 
 export type Workspace = {
-  models: { [key: string]: Model }, // Parsed objects prior to de-referencing, edited in ui/ide
+  models: { [key: string]: Map<string, Model> }, // Parsed objects prior to de-referencing, edited in ui/ide
   schemas: { [key: string]: string }, // Parsed maybe ajv objects?, used to parse, validate models
   templates: { [key: string]: OutputTemplate[]},
   scripts: { [key: string]: any }, // Loaded, used to pre and post-process models

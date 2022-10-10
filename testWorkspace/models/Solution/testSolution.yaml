@@ -1,6 +1,6 @@
 name: Test Solution
 dependsOn:
-  - "../System/testSystem.yaml"
+  - ref: "../System/testSystem.yaml"
 changed:
   new:
-  - "../System/testSystem.yaml#/components/ui"
+  - ref: "../System/testSystem.yaml#/components/ui"

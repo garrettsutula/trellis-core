@@ -5,9 +5,10 @@ import { extractModelType } from "../../../common/regex";
 import { parse } from 'yaml';
 import { nameToId } from '../../../common/nameToId';
 
- 
+import { Model } from "../../../types";
+
 export async function getModels(basePath: string = process.cwd(), schemas?) {
-  const models = {};
+  const models: {[key: string]: Map<string, Model>} = {};
   const cwd = process.cwd();
 
   const modelFilePaths = await globAsync(path.join(basePath, './models/**/*.yaml'));

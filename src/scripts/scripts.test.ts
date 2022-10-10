@@ -8,7 +8,7 @@ const cwd = process.cwd();
 const testObject = {name: 'testObject', testReference: {$ref: path.join(cwd, './testWorkspace/models/Solution/testSolution.yaml')}};
 const testPreprocessFn = (newName) => { return (model) => { model.name = newName; return model; }};
 const testPostprocessFn = (newName) => { return (model) => { model.testReference.name = newName; return model; }}
-
+/*
 test('model processing scripts', async (t) => {
   const preprocessingTests = 
     [
@@ -43,3 +43,4 @@ test('model processing scripts', async (t) => {
   ]
   await Promise.all([...preprocessingTests, ...postprocessingTests]);
 });
+*/

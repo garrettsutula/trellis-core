@@ -1,46 +1,47 @@
 import { Workspace } from "../../../types";
 
+const systemModels = new Map();
+systemModels.set('testSystem', {
+  name: 'Test System',
+  components: {
+    ui: {
+      id: 'testSystem.ui',
+      name: 'Mobile App',
+      type: 'UI',
+      dependencies: [{ $ref: "#/System/testSystem/components/service" }],
+    },
+    service: {
+      id: 'testSystem.service',
+      name: 'REST API',
+      type: 'service',
+      dependencies: [ { $ref: "#/System/testSystem/components/db" } ],
+    },
+    db: {
+      name: 'SQL Database',
+      id: 'testSystem.db',
+      type: 'Database',
+      dependencies: [],
+    },
+  },
+});
+systemModels.set('newSystem', {
+  name: 'New System',
+  components: {
+    newUi: {
+      name: 'New Mobile App',
+      id: 'newSystem.newUi',
+      type: 'UI',
+      dependencies: [
+        { $ref: "#/System/testSystem/components/service" }
+      ]
+    }
+  }
+});
+
 export function provider() {
   let currentWorkspace = {
     models: {
-      System: {
-        testSystem: {
-          name: 'Test System',
-          components: {
-            ui: {
-              id: 'testSystem.ui',
-              name: 'Mobile App',
-              type: 'UI',
-              dependencies: [{ $ref: "#/System/testSystem/components/service" }],
-            },
-            service: {
-              id: 'testSystem.service',
-              name: 'REST API',
-              type: 'service',
-              dependencies: [ { $ref: "#/System/testSystem/components/db" } ],
-            },
-            db: {
-              name: 'SQL Database',
-              id: 'testSystem.db',
-              type: 'Database',
-              dependencies: [],
-            },
-          },
-        },
-        newSystem: {
-          name: 'New System',
-          components: {
-            newUi: {
-              name: 'New Mobile App',
-              id: 'newSystem.newUi',
-              type: 'UI',
-              dependencies: [
-                { $ref: "#/System/testSystem/components/service" }
-              ]
-            }
-          }
-        }
-      },
+      System: systemModels
     },
     schemas: {}, // can skip for now
     templates: {

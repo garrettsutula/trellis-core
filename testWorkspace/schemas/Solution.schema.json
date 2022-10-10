@@ -12,8 +12,7 @@
     "dependsOn": {
       "type": "array",
       "items": {
-        "type": "string",
-        "format": "uri-reference"
+        "$ref": "./Reference.schema.json"
       }
     },
     "changed": {
@@ -22,22 +21,19 @@
         "new": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uri-reference"
+            "$ref": "./Reference.schema.json"
           }
         },
         "modified": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uri-reference"
+            "$ref": "./Reference.schema.json"
           }
         },
         "deprecated": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uri-reference"
+            "$ref": "./Reference.schema.json"
           }
         }
       }

@@ -4,7 +4,7 @@ components:
     name: Test UI
     type: UI
     dependsOn:
-      - "#/components/service"
+      - ref: "#/components/service"
   service:
     name: Test Service
     type: Service
