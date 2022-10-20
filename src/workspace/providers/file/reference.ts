@@ -1,31 +1,29 @@
 import * as jp from 'jsonpath-faster';
+import * as path from 'path';
+import * as pointer from 'json-pointer';
 
 function dereference(ref: string, currentModel, models) {
   // Current model
   let file, path;
-  const refFragments = ref.split('#');
-  if (refFragments.length === 1) path = refFragments[0];
-  else if (refFragments.length === 2 ) {
-    file = refFragments[0];
-    path = refFragments[1];
-  } else {
-    throw new Error(`Unexpected number of reference fragments: ${refFragments.length}\n${JSON.stringify(refFragments)}`);
+  const [filePath, jsonPointer] = ref.split('#');
+  const model = models.get(filePath);
+  if(jsonPointer) {
+    const value = pointer.get(model, `#${jsonPointer}`);
+    if (!value) throw new Error(`Json Pointer: ${ref} didn't resolve in model ${path.basename(filePath)}`);
+    return value;
   }
-  
-  if (ref.startsWith('#')) {
-
-  } else if (ref.startsWith('./')) {
-
-  }
+  return model;
 }
 
 export function dereferenceModel(model: any, models) {
   const derefCache = new Map();
+  const modelDir = path.dirname(model.path);
   const nodes = jp.apply(model, '$..[?(@.ref)]', ({ ref }) => {
-    let refValue = derefCache.get(ref);
+    const fullRefPath = ref.startsWith('#') ? `${model.path}${ref}` : path.join(modelDir, ref);
+    let refValue = derefCache.get(fullRefPath);
     if (refValue) return refValue;
-    refValue = dereference(ref, model, models);
-    derefCache.set(ref, refValue);
+    refValue = dereference(fullRefPath, model, models);
+    derefCache.set(fullRefPath, refValue);
     return refValue;
   });
   console.log(nodes);
