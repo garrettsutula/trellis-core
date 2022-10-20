@@ -8,7 +8,7 @@ import { nameToId } from '../../../common/nameToId';
 import { Model } from "../../../types";
 
 export async function getModels(basePath: string = process.cwd(), schemas?) {
-  const models: {[key: string]: Map<string, Model>} = {};
+  const models = new Map();
   const cwd = process.cwd();
 
   const modelFilePaths = await globAsync(path.join(basePath, './models/**/*.yaml'));
@@ -20,14 +20,12 @@ export async function getModels(basePath: string = process.cwd(), schemas?) {
       let model;
       try {
         model = parse(fileBuffer.toString());
-        schemaValidator(model);
+        schemaValidator(model)
+        model.path = modelPath;
       } catch (e) {
         throw new Error(`Problem parsing model JSON: ${JSON.stringify(e)}`);
       }
-      if(!models[type]) {
-        models[type] = new Map();
-      }
-      models[type].set(model.id || nameToId(model.name), model);
+      models.set(modelPath, model);
     } else {
       throw new Error(`No schema definition for model type ${type}`);
     }

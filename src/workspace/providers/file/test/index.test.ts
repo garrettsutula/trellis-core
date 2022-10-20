@@ -33,7 +33,7 @@ test('load workspace from filesystem', async (t) => {
   });
 
   await t.test('dereference model', (t) => {
-    const deref = dereferenceModel(Array.from(models.Solution.values())[0], models);
+    const deref = dereferenceModel(Array.from(models.values())[0], models);
   })
 
 });

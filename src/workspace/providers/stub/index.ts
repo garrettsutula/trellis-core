@@ -40,9 +40,7 @@ systemModels.set('newSystem', {
 
 export function provider() {
   let currentWorkspace = {
-    models: {
-      System: systemModels
-    },
+    models: systemModels,
     schemas: {}, // can skip for now
     templates: {
       System: [
