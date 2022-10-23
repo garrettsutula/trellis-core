@@ -24,3 +24,9 @@ export type Workspace = {
   templates: { [key: string]: OutputTemplate[]},
   scripts: { [key: string]: any }, // Loaded, used to pre and post-process models
 };
+
+export type WorkspaceProvider = {
+  readWorkspace: (opts: GenericObject) => Workspace;
+  saveWorkspaceChange: (workspace: Workspace, opts: GenericObject) => any;
+  dereferenceModels: (models: Models) => Model[];
+}

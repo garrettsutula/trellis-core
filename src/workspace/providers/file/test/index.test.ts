@@ -7,10 +7,16 @@ import { getSchemas } from '../schemas';
 import { getModels } from '../models';
 import { getTemplates } from '../templates';
 import { dereferenceModels, rereferenceModel } from '../reference';
+import { provider } from '../';
 
 test('load workspace from filesystem', async (t) => {
 
   Promise.all([
+    t.test('load workspace', async () => {
+      const workspaceProvider = provider('./testWorkspace');
+      const workspace = await workspaceProvider.readWorkspace({});
+      assert.ok(workspace);
+    }),
     t.test('load scripts from filesystem', async (t) => {
       const scripts = await getScripts(path.join(process.cwd(),'./testWorkspace'));
       assert.ok(scripts);
@@ -34,6 +40,6 @@ test('load workspace from filesystem', async (t) => {
 
   await t.test('dereference model', (t) => {
     const deref = dereferenceModels(models);
-  })
+  });
 
 });

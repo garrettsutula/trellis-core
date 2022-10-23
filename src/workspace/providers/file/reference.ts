@@ -1,7 +1,7 @@
 import * as jp from 'jsonpath-faster';
 import * as path from 'path';
 import * as pointer from 'json-pointer';
-import { Models } from '../../../types';
+import { Model, Models } from '../../../types';
 
 function dereferenceProperty(ref: string, models) {
   // Current model
@@ -16,11 +16,9 @@ function dereferenceProperty(ref: string, models) {
   return referencedModel;
 }
 
-export function dereferenceModels(allModels: Models) {
+export function dereferenceModels(allModels: Models): Model[] {
   const derefCache = new Map();
-  const dereferencedModels = {};
-
-  return  Array.from(allModels.entries()).map(([modelPath, model]) => {
+  return Array.from(allModels.entries()).map(([modelPath, model]) => {
     const modelCopy: any = structuredClone(model);
     const modelDir = path.dirname(modelPath);
     const matchedPaths = jp.paths(modelCopy, '$..[?(@.ref)]');
