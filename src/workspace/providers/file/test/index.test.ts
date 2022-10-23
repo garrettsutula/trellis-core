@@ -6,7 +6,7 @@ import { getScripts } from '../scripts';
 import { getSchemas } from '../schemas';
 import { getModels } from '../models';
 import { getTemplates } from '../templates';
-import { dereferenceModel, rereferenceModel } from '../reference';
+import { dereferenceModels, rereferenceModel } from '../reference';
 
 test('load workspace from filesystem', async (t) => {
 
@@ -33,7 +33,7 @@ test('load workspace from filesystem', async (t) => {
   });
 
   await t.test('dereference model', (t) => {
-    const deref = dereferenceModel(Array.from(models.values())[0], models);
+    const deref = dereferenceModels(models);
   })
 
 });

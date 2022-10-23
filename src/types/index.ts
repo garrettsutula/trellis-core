@@ -10,6 +10,8 @@ export type PartialTemplate = {
 export type GenericObject = { [key: string]: unknown};
 export type ModelElement = GenericObject & {id: number, name: string, description: string, dependencies: string[]};
 export type Model = { [key: string]: unknown};
+export type Models = Map<string, Model>;
+export type ParsedSchema = { validate: any, refs: string[] };
 export type OutputTemplate = {
   modelType: string,
   fileType: string,
@@ -17,8 +19,8 @@ export type OutputTemplate = {
 };
 
 export type Workspace = {
-  models:  Map<string, Model>, // Parsed objects prior to de-referencing, edited in ui/ide
-  schemas: { [key: string]: string }, // Parsed maybe ajv objects?, used to parse, validate models
+  models: Models, // Parsed objects prior to de-referencing, edited in ui/ide
+  schemas: { [key: string]: ParsedSchema }, // Parsed maybe ajv objects?, used to parse, validate models
   templates: { [key: string]: OutputTemplate[]},
   scripts: { [key: string]: any }, // Loaded, used to pre and post-process models
 };

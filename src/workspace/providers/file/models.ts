@@ -3,9 +3,6 @@ import * as path from 'path';
 import { globAsync } from "../../../common/glob";
 import { extractModelType } from "../../../common/regex";
 import { parse } from 'yaml';
-import { nameToId } from '../../../common/nameToId';
-
-import { Model } from "../../../types";
 
 export async function getModels(basePath: string = process.cwd(), schemas?) {
   const models = new Map();
@@ -14,16 +11,18 @@ export async function getModels(basePath: string = process.cwd(), schemas?) {
   const modelFilePaths = await globAsync(path.join(basePath, './models/**/*.yaml'));
   const fileLoadPromises = await Promise.all(modelFilePaths.map(async (modelPath) => {
     const type = (modelPath.replace(cwd, '').match(extractModelType) || [])[1];
-    const schemaValidator = schemas[type];
+    const {validate: schemaValidator} = schemas[type];
     if (schemaValidator) {
       const fileBuffer = await readFile(modelPath);
       let model;
       try {
         model = parse(fileBuffer.toString());
-        schemaValidator(model)
+        schemaValidator(model);
         model.path = modelPath;
+        model.type = type;
       } catch (e) {
-        throw new Error(`Problem parsing model JSON: ${JSON.stringify(e)}`);
+        console.error(`Problem parsing model JSON for: ${modelPath}`)
+        throw e;
       }
       models.set(modelPath, model);
     } else {
