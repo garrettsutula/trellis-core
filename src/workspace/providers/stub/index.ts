@@ -1,8 +1,10 @@
 import { Workspace } from "../../../types";
 
 const systemModels = new Map();
-systemModels.set('testSystem', {
+systemModels.set('./testSystem.yaml', {
   name: 'Test System',
+  type: 'System',
+  path: './testSystem.yaml',
   components: {
     ui: {
       id: 'testSystem.ui',
@@ -24,8 +26,10 @@ systemModels.set('testSystem', {
     },
   },
 });
-systemModels.set('newSystem', {
+systemModels.set('./newSystem.yaml', {
   name: 'New System',
+  type: 'System',
+  path: './newSystem.yaml',
   components: {
     newUi: {
       name: 'New Mobile App',

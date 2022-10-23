@@ -1,7 +1,7 @@
 import { globAsync } from "../../../common/glob";
 import { schemaType } from "../../../common/regex";
 import path from "path";
-import { getSchemaValidator, addSchema } from "../../../schemas";
+import { getSchemaValidator, addSchema, getRefsInSchema } from "../../../schemas";
 import { readFileJson } from "../../../common/readFiles";
 
 
@@ -21,7 +21,11 @@ export async function getSchemas(basePath = process.cwd()) {
     }));
     Object.keys(schemas)
       .forEach((schemaKey) => {
-        schemas[schemaKey] = getSchemaValidator(schemas[schemaKey]);
+        schemas[schemaKey] = 
+        {
+          validate: getSchemaValidator(schemas[schemaKey]),
+          refs: getRefsInSchema(schemas[schemaKey]),
+        };
       });
     return schemas;
 }

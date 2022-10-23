@@ -4,12 +4,12 @@ import { globAsync } from "../../../common/glob";
 import { scriptType } from "../../../common/regex";
 
 export async function getScripts(basePath: string = process.cwd()) {
-  const scriptPaths = {};
   const cwd = process.cwd();
+  const scriptPaths = {};
 
-  const preprocessingScriptPaths = await globAsync(path.join(basePath, './scripts/*.js'));
+  const preprocessingScriptPaths = await globAsync(path.join(cwd, basePath, './scripts/*.js'));
   const preprocessingScripts = await Promise.all(preprocessingScriptPaths.map(async (scriptPath) => {
-    const scripts = await import(`${scriptPath}`);
+    const scripts = await import(scriptPath);
     return {
       preprocessFn: scripts.preprocessFn,
       postprocessFn: scripts.postprocessFn,
