@@ -11,7 +11,7 @@ export type GenericObject = { [key: string]: unknown};
 export type ModelElement = GenericObject & {id: number, name: string, description: string, dependencies: string[]};
 export type Model = { [key: string]: unknown};
 export type Models = Map<string, Model>;
-export type ParsedSchema = { validate: any, refs: string[] };
+export type ParsedSchema = { validate: any, refs: string[], schema: {[key: string]: any} };
 export type OutputTemplate = {
   modelType: string,
   fileType: string,
