@@ -10,7 +10,7 @@ export async function getModels(basePath: string = process.cwd(), schemas?) {
 
   const modelFilePaths = await globAsync(path.join(basePath, './models/**/*.yaml'));
   const fileLoadPromises = await Promise.all(modelFilePaths.map(async (modelPath) => {
-    const type = (modelPath.replace(cwd, '').match(extractModelType) || [])[1];
+    const type = (modelPath.replace(cwd, '').match(extractModelType) || [])[1] + '.schema.json';
     const {validate: schemaValidator} = schemas[type];
     if (schemaValidator) {
       const fileBuffer = await readFile(modelPath);

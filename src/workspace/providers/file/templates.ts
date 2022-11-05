@@ -11,7 +11,7 @@ export async function getTemplates(basePath = process.cwd()) {
   const loadedTemplates = await Promise.all(templatePaths.map(async (templatePath) => {
     const {groups: {modelType, fileName, fileType} = {}} = templatePath.replace(cwd, '').match(extractTemplateType);
     return {
-      modelType,
+      modelType: modelType + '.schema.json',
       fileType,
       fileName,
       template: compileTemplate((await readFile(templatePath)).toString()),

@@ -16,7 +16,7 @@ export async function getScripts(basePath: string = process.cwd()) {
     }
   }))
   preprocessingScriptPaths.forEach((scriptPath, i) => {
-    const type = scriptPath.match(scriptType)[1];
+    const type = scriptPath.match(scriptType)[1] + '.schema.json';
     scriptPaths[type] = preprocessingScripts[i];
   });
   return scriptPaths;

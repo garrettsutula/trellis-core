@@ -11,8 +11,8 @@ export async function getSchemas(basePath = process.cwd()) {
   const schemaFilePaths = await globAsync(path.join(basePath, './schemas/**/*.json'));
   await Promise.all(schemaFilePaths.map(async (schemaPath) => {
       try {
-        const type = schemaPath.replace(cwd, '').match(schemaType)[1];
         const schema = await readFileJson(schemaPath);
+        const type = schema.$id;
         addSchema(schema);
         schemas[type] = schema;
       } catch (err) {
@@ -25,6 +25,7 @@ export async function getSchemas(basePath = process.cwd()) {
         {
           validate: getSchemaValidator(schemas[schemaKey]),
           refs: getRefsInSchema(schemas[schemaKey]),
+          schema: schemas[schemaKey],
         };
       });
     return schemas;
