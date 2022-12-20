@@ -1,8 +1,9 @@
-import { readFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import * as path from 'path';
 import { globAsync } from "../../../common/glob";
 import { extractModelType } from "../../../common/regex";
-import { parse } from 'yaml';
+import { parse, stringify } from 'yaml';
+import { Model } from "../../../types";
 
 export async function getModels(basePath: string = process.cwd(), schemas?) {
   const models = new Map();
@@ -34,3 +35,21 @@ export async function getModels(basePath: string = process.cwd(), schemas?) {
   return models;
 }
 
+export async function saveModelUpdate(model: Model, schemas): Promise<void> {
+  const modelCopy = structuredClone(model);
+  const path = modelCopy.path as string;
+  const type = modelCopy.type as string;
+  const { validate: schemaValidator } = schemas[type];
+  delete modelCopy.path;
+  delete modelCopy.type;
+  try {
+    schemaValidator(modelCopy);
+  } catch (e) {
+    throw new Error(`Error validating model prior to saving to disk: ${JSON.stringify(e)}`);
+  }
+  try {
+    writeFile(path, stringify(modelCopy));
+  } catch(e) {
+    throw new Error(`Error writing updated model to disk: ${JSON.stringify(e)}`);
+  }
+}

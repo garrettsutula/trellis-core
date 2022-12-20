@@ -25,6 +25,11 @@ export type Workspace = {
   scripts: { [key: string]: any }, // Loaded, used to pre and post-process models
 };
 
+export type WorkspaceChange = {
+  workspaceItemPath: string,
+  workspaceItem: Model | OutputTemplate | ParsedSchema;
+};
+
 export type WorkspaceProvider = {
   readWorkspace: (opts: GenericObject) => Workspace;
   saveWorkspaceChange: (workspace: Workspace, opts: GenericObject) => any;

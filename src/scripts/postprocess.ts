@@ -26,6 +26,6 @@ export async function postprocessModel(modelPathOrObject: string | $RefParser.JS
   // FIXME
   // Ugly hack for now. 
   // Explanation: This library does what we want and does it well but we are not always using it to parse JSON schema documents.
-  // This will be addressed later by likely reducing the use of uri-references in models.
+  // the 'workspace' module is intended to replace this functionality and provide backend-specific implementations of these modules.
   return dereferenceSchema(modelPathOrObject) as any;
 };
