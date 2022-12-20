@@ -12,20 +12,20 @@ export async function getSchemas(basePath = process.cwd()) {
   await Promise.all(schemaFilePaths.map(async (schemaPath) => {
       try {
         const schema = await readFileJson(schemaPath);
-        const type = schema.$id;
+        const id = schema.$id;
         addSchema(schema);
-        schemas[type] = schema;
+        schemas[id] = schema;
       } catch (err) {
         throw err;
       }
     }));
     Object.keys(schemas)
-      .forEach((schemaKey) => {
-        schemas[schemaKey] = 
+      .forEach((id) => {
+        schemas[id] = 
         {
-          validate: getSchemaValidator(schemas[schemaKey]),
-          refs: getRefsInSchema(schemas[schemaKey]),
-          schema: schemas[schemaKey],
+          validate: getSchemaValidator(schemas[id]),
+          refs: getRefsInSchema(schemas[id]),
+          schema: schemas[id],
         };
       });
     return schemas;
