@@ -1,6 +1,8 @@
 import { provider as stubProvider } from './providers/stub';
 import { provider as fileProvider} from './providers/file';
 
+export { getRenderer } from './providers/renderer';
+
 export async function getWorkspaceProvider(type: string, opts?: {[key: string]: any}) {
   switch(type) {
     case 'stub':
